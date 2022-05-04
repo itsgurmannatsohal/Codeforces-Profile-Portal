@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Resources/index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    Handle: <input type="text" id="handle_id" />
+    <button onclick="getInfo()">Submit</button>
+    <div id="info">
+      <p id="name"></p>
+      <p id="rating"></p>
+      <p id="maxRating"></p>
+      <p id="rank"></p>
+      <p id="place"></p>
+      <div id="pic"></div>
+    </div>
+    <div id="blog">
+      <button onclick="getBlog()" id="blogBtn">Blogs</button>
+      <p id="blogTitle"></p>
+      <p id="comment"></p>
+    </div>
+    
+
+    <script src="./Resources/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </body>
+</html>
