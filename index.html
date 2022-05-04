@@ -5,11 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./Resources/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
   </head>
   <body>
     Handle: <input type="text" id="handle_id" />
     <button onclick="getInfo()">Submit</button>
+
     <div id="info">
       <p id="name"></p>
       <p id="rating"></p>
@@ -18,14 +20,30 @@
       <p id="place"></p>
       <div id="pic"></div>
     </div>
+
+    <div id="ratings">
+      <p id="rank0"></p>
+      <p id="rank1"></p>
+      <p id="rank2"></p>
+      <p id="rank3"></p>
+      <p id="rank4"></p>
+    </div>
+
+    <div id="myChart" style="max-width:700px; height:400px"></div>
+<br>
     <div id="blog">
       <button onclick="getBlog()" id="blogBtn">Blogs</button>
-      <p id="blogTitle"></p>
-      <p id="comment"></p>
+      <h3 id="blogTitle1"></h3>
+      <p id="comment1"></p>
+      <h3 id="blogTitle2"></h3>
+      <p id="comment2"></p>
+      <h3 id="blogTitle3"></h3>
+      <p id="comment3"></p>
     </div>
     
 
     <script src="./Resources/index.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>></script>
   </body>
 </html>
