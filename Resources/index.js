@@ -75,35 +75,59 @@ const getComments = () => {
         const responseTwo = responses[1];
         const responseThree = responses[2];
 
-        console.log(responseOne, responseTwo, responseThree);
+        //console.log(responseOne, responseTwo, responseThree);
 
-        let text1 = responseOne.data.result[0].text + " ";
-        for (let i = 1; i < 3; i++) {
-          text1 += responseOne.data.result[i].text + " ";
+        let len1 = responseOne.data.result.length;
+        let len2 = responseTwo.data.result.length;
+        let len3 = responseThree.data.result.length;
+        let a, b, c;
+
+        if (len1 < 3) {
+          a = len1;
+        } else {
+          a = 3;
+        }
+        if (len2 < 3) {
+          b = len2;
+        } else {
+          b = 3;
+        }
+        if (len3 < 3) {
+          c = len3;
+        } else {
+          c = 3;
+        }
+
+        let text1 = "";
+        for (let i = 0; i < a; i++) {
+          text1 +=
+            responseOne.data.result[i].commentatorHandle +
+            ": " +
+            responseOne.data.result[i].text +
+            " ";
         }
         document.getElementById("comment1").innerHTML = text1;
 
-        let text2 = responseTwo.data.result[0].text + " ";
-        for (let i = 1; i < 3; i++) {
-          text2 += responseTwo.data.result[i].text + " ";
+        let text2 = "";
+        for (let i = 0; i < b; i++) {
+          text2 +=
+            responseTwo.data.result[i].commentatorHandle +
+            ": " +
+            responseTwo.data.result[i].text +
+            " ";
         }
+
         document.getElementById("comment2").innerHTML = text2;
 
-        let text3 = responseThree.data.result[0].text + " ";
-        for (let i = 1; i < 3; i++) {
-          text3 += responseThree.data.result[i].text + " ";
+        let text3 = "";
+        for (let i = 0; i < c; i++) {
+          text3 +=
+            responseThree.data.result[i].commentatorHandle +
+            ": " +
+            responseThree.data.result[i].text +
+            " ";
         }
         document.getElementById("comment3").innerHTML = text3;
-
-        // document.getElementById("blogTitle1").onclick = document.getElementById(
-        //   "comment1"
-        // ).style.display = "inline";
-        // document.getElementById("blogTitle2").onclick = document.getElementById(
-        //   "comment2"
-        // ).style.display = "inline";
-        // document.getElementById("blogTitle3").onclick = document.getElementById(
-        //   "comment3"
-        // ).style.display = "inline";
       })
     )
     .catch((errors) => {
@@ -115,7 +139,7 @@ const getRating = () => {
   axios
     .get("https://codeforces.com/api/user.rating?handle=" + handleValue)
     .then((response) => {
-      console.log(response);
+      //console.log(response);
       let num = response.data.result.length;
 
       document.getElementById("rank0").innerHTML =
