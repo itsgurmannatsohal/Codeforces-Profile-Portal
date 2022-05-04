@@ -28,7 +28,8 @@ const getInfo = () => {
         "pic"
       ).innerHTML = `<img src='${response.data.result[0].avatar}'>`;
       document.getElementById("blogBtn").style.display = "inline";
-
+      document.getElementById("users").style.display = "block";
+      document.getElementById("fren").style.display = "none";
       getRating();
     })
     .catch((error) => console.error(error));
@@ -171,7 +172,6 @@ const getRating = () => {
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        // Set Data
         var data = google.visualization.arrayToDataTable([
           ["Contest", "Rating"],
           [
@@ -195,14 +195,14 @@ const getRating = () => {
             response.data.result[num - 1].newRating,
           ],
         ]);
-        // Set Options
+
         var options = {
           title: "",
           hAxis: { title: "Contests" },
           vAxis: { title: "Rating" },
           legend: "none",
         };
-        // Draw
+
         var chart = new google.visualization.LineChart(
           document.getElementById("myChart")
         );
@@ -211,3 +211,97 @@ const getRating = () => {
     })
     .catch((error) => console.log(error));
 };
+
+const getFriends = async () => {
+  
+  const apiKey = "";
+  const secret = "";
+  const apiSig = "123456";
+  const time = Math.floor(Date.now() / 1000);
+  const hashdata =
+    "123456/user.friends?apiKey=" +
+    apiKey +
+    "&onlyOnline=false&time=" +
+    time +
+    "#" +
+    secret;
+  const hashdata2 =
+    "123456/user.friends?apiKey=" +
+    apiKey +
+    "&onlyOnline=true&time=" +
+    time +
+    "#" +
+    secret;
+  const hash = await SHA512(hashdata);
+  const hash2 = await SHA512(hashdata2);
+
+  let online, all, onlinestr, allstr;
+
+  await axios
+    .get(
+      "https://codeforces.com/api/user.friends?onlyOnline=false&apiKey=" +
+        apiKey +
+        "&time=" +
+        time +
+        "&apiSig=" +
+        apiSig +
+        hash
+    )
+    .then((response) => {
+      console.log(response);
+      all = response.data.result;
+      console.log("All: " + all);
+
+      document.getElementById("users").style.display = "none";
+      document.getElementById("fren").style.display = "block";
+      document.getElementById("handle_id").value = "";
+    })
+    .catch((error) => console.log(error));
+
+  await axios
+    .get(
+      "https://codeforces.com/api/user.friends?onlyOnline=true&apiKey=" +
+        apiKey +
+        "&time=" +
+        time +
+        "&apiSig=" +
+        apiSig +
+        hash2
+    )
+    .then((response) => {
+      console.log(response);
+      online = response.data.result;
+      console.log("Online: " + online);
+      onlinestr = "";
+      online.forEach((element) => {
+        onlinestr += `<td>` + element + `</td>`;
+      });
+      document.getElementById("online").innerHTML =
+        `<tr>` + onlinestr + `</tr>`;
+    })
+    .catch((error) => console.log(error));
+
+  document.getElementById("users").style.display = "none";
+  document.getElementById("fren").style.display = "block";
+  document.getElementById("handle_id").value = "";
+
+  all = all.filter(function (el) {
+    return online.indexOf(el) < 0;
+  });
+  allstr = "";
+  all.forEach((element) => {
+    console.log(element);
+    allstr += `<td>` + element + `</td>`;
+  });
+  document.getElementById("all").innerHTML = `<tr>` + allstr + `</tr>`;
+};
+
+async function SHA512(str) {
+  return crypto.subtle
+    .digest("SHA-512", new TextEncoder("utf-8").encode(str))
+    .then((buf) => {
+      return Array.prototype.map
+        .call(new Uint8Array(buf), (x) => ("00" + x.toString(16)).slice(-2))
+        .join("");
+    });
+}

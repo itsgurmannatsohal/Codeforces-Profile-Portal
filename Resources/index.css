@@ -2,15 +2,6 @@
   display: none;
 }
 
-#info {
-  background-color: aqua;
+#users, #fren {
+  display: none;
 }
-
-#ratings {
-  background-color: pink;
-}
-
-#blog {
-  background-color: blueviolet;
-}
-

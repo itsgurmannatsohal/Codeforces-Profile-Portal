@@ -11,8 +11,11 @@
   <body>
     Handle: <input type="text" id="handle_id" />
     <button onclick="getInfo()">Submit</button>
+    <button onclick="getFriends()">Friends</button>
 
-    <div id="info">
+    <div id="users">
+
+      <div id="info">
       <p id="name"></p>
       <p id="rating"></p>
       <p id="maxRating"></p>
@@ -40,10 +43,16 @@
       <h3 id="blogTitle3"></h3>
       <p id="comment3"></p>
     </div>
+    </div>
+
+    <div id="fren">
+      <div style="color: green;" id="online"></div>
+      <div id="all"></div>
+    </div>
     
 
     <script src="./Resources/index.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://www.gstatic.com/charts/loader.js"></script>></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script></script>
   </body>
 </html>
